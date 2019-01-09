@@ -7,7 +7,7 @@ import { Pageable } from '@lcu/common';
 import { PageUIService, ForgeOrganizationIdentityService } from '@lcu/daf-common';
 import { PageEvent, MatPaginator } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { FacebookLoginModel, GoogleLoginModel } from 'projects/common/src/lcu.api';
+import { FacebookLoginModel, GoogleLoginModel } from '@lcu/identity';
 
 
 @Component({
