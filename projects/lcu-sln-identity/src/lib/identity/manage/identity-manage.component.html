@@ -1,0 +1,212 @@
+<mat-toolbar>
+	<a mat-button [class.active]="ManageState == 'Overview'" (click)="SetManageState('Overview')"><mat-icon>home</mat-icon></a>
+
+	<a mat-button [class.active]="ManageState == 'Users'" (click)="SetManageState('Users')">Users</a>
+
+	<a mat-button [class.active]="ManageState == 'AccessConfigs'" (click)="SetManageState('AccessConfigs')">Access Configs</a>
+
+	<a mat-button [class.active]="ManageState == 'AccessRights'" (click)="SetManageState('AccessRights')">Access Rights</a>
+
+	<span class="filler"></span>
+
+	<a mat-icon-button [class.active]="ManageState == 'Settings'" (click)="SetManageState('Settings')"><mat-icon>settings</mat-icon></a>
+</mat-toolbar>
+
+<div *ngIf="!Loading.Value" [ngSwitch]="ManageState">
+	<ng-container *ngSwitchCase="'Overview'">
+		Hello from Identity Land
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'Users'">
+		<div class="users" *ngIf="!Error">
+			<mat-table #table [dataSource]="Users" *ngIf="Users && Users.length > 0">
+				<ng-container *ngFor="let column of UsersColumnsToDisplay">
+					<ng-container [matColumnDef]="column" *ngIf="column != 'Actions'">
+						<mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+						<mat-cell *matCellDef="let user"> {{user[column]}} </mat-cell>
+					</ng-container>
+				</ng-container>
+
+				<ng-container matColumnDef="Actions">
+					<mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+					<mat-cell *matCellDef="let user">
+						<a mat-raised-button color="primary" (click)="ManageUser(user.Username)">Manage</a>
+
+						<!--<a mat-raised-button color="primary">Claims</a>--><!--[routerLink]="[user.Username, 'claims']"-->
+
+						<a mat-raised-button color="primary">Lock Out</a>
+					</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="UsersColumnsToDisplay"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: UsersColumnsToDisplay;"></mat-row>
+			</mat-table>
+
+			<mat-paginator #paging *ngIf="Users && Users.length > 0" [length]="TotalRecords"
+						   [pageSize]="PageSize" [pageSizeOptions]="PageSizeOptions"
+						   (page)="LoadUsers($event)">
+			</mat-paginator>
+		</div>
+
+		<div>
+			<a mat-raised-button color="primary" class="push-out">Invite New User</a>
+		</div>
+
+		<div class="error" *ngIf="Error">
+			{{Error}}
+		</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'AccessCards'">
+		<div class="access-configs" *ngIf="!Error">
+			<mat-table #table [dataSource]="AccessConfigs" *ngIf="AccessConfigs && AccessConfigs.length > 0">
+				<ng-container matColumnDef="Type">
+					<mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+
+					<mat-cell *matCellDef="let accessConfig">
+						{{accessConfig.Type}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="AccessRights">
+					<mat-header-cell *matHeaderCellDef> Access Rights </mat-header-cell>
+
+					<mat-cell *matCellDef="let accessConfig">
+						<ng-container *ngIf="AccessConfigActiveEdit != accessConfig.Type">
+							<span class="push-left" *ngFor="let arId of accessConfig.AccessRightIDs">
+								{{GetAccessRight(arId)?.Name}}
+							</span>
+						</ng-container>
+
+						<ng-container *ngIf="AccessConfigActiveEdit == accessConfig.Type">
+							<mat-select class="push-up" placeholder="Choose Access Rights" [(ngModel)]="accessConfig.AccessRightIDs" name="accRightIds" multiple>
+								<mat-option *ngFor="let ar of AccessRights" [value]="ar.ID">{{ar.Name}}</mat-option>
+							</mat-select>
+						</ng-container>
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="Actions">
+					<mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+
+					<mat-cell *matCellDef="let accessConfig">
+						<ng-container *ngIf="AccessConfigActiveEdit != accessConfig.Type">
+							<a mat-icon-button color="primary" (click)="SetActiveEdit(accessConfig.Type)"><mat-icon>edit</mat-icon></a>
+						</ng-container>
+
+						<ng-container *ngIf="AccessConfigActiveEdit == accessConfig.Type">
+							<a mat-icon-button color="primary" (click)="SetActiveEdit(accessConfig.Type)"><mat-icon>save</mat-icon></a>
+						</ng-container>
+					</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="AccessConfigsColumnsToDisplay"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: AccessConfigsColumnsToDisplay;"></mat-row>
+			</mat-table>
+
+			<mat-paginator #paging *ngIf="AccessRights && AccessRights.length > 0" [length]="TotalRecords"
+						   [pageSize]="PageSize" [pageSizeOptions]="PageSizeOptions"
+						   (page)="LoadAccessRights($event)">
+			</mat-paginator>
+		</div>
+
+		<div>
+			<a mat-raised-button color="primary" class="push-out">Create New Access Card</a>
+		</div>
+		<div class="error" *ngIf="Error">
+			{{Error}}
+		</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'AccessRights'">
+		<div class="access-rights" *ngIf="!Error">
+			<mat-table #table [dataSource]="AccessRights" *ngIf="AccessRights && AccessRights.length > 0">
+				<ng-container *ngFor="let column of AccessRightsColumnsToDisplay">
+					<ng-container [matColumnDef]="column" *ngIf="column != 'Actions'">
+						<mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+						<mat-cell *matCellDef="let accessRight"> {{accessRight[column]}} </mat-cell>
+					</ng-container>
+				</ng-container>
+
+				<ng-container matColumnDef="Actions">
+					<mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+					<mat-cell *matCellDef="let accessRight">
+						<a mat-raised-button color="primary" [routerLink]="['manage', accessRight.ID]">Manage</a>
+					</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="AccessRightsColumnsToDisplay"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: AccessRightsColumnsToDisplay;"></mat-row>
+			</mat-table>
+
+			<mat-paginator #paging *ngIf="AccessRights && AccessRights.length > 0" [length]="TotalRecords"
+						   [pageSize]="PageSize" [pageSizeOptions]="PageSizeOptions"
+						   (page)="LoadAccessRights($event)">
+			</mat-paginator>
+		</div>
+
+		<div>
+			<a mat-raised-button color="primary" class="push-out">Create New Access Right</a>
+		</div>
+
+		<div class="error" *ngIf="Error">
+			{{Error}}
+		</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'Manage'">
+		<h2>
+			<a mat-icon-button color="warn" (click)="ManageUser(null)">
+				<mat-icon>cancel</mat-icon>
+			</a>
+
+			Managing {{UserActiveEdit}}
+		</h2>
+
+		<div class="claims" *ngIf="!Error">
+			<mat-table #table [dataSource]="Claims" *ngIf="Claims && Claims.length > 0">
+				<ng-container *ngFor="let column of ClaimsColumnsToDisplay">
+					<ng-container [matColumnDef]="column" *ngIf="column != 'Actions'">
+						<mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+						<mat-cell *matCellDef="let claim"> {{claim[column]}} </mat-cell>
+					</ng-container>
+				</ng-container>
+
+				<ng-container matColumnDef="Actions">
+					<mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+					<mat-cell *matCellDef="let claim">
+						<a mat-raised-button color="primary" (click)="ManageClaim(claim)">Edit</a>
+
+						<a mat-icon-button color="warn" (click)="DeleteClaim(claim)">
+							<mat-icon>delete</mat-icon>
+						</a>
+					</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="ClaimsColumnsToDisplay"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: ClaimsColumnsToDisplay;"></mat-row>
+			</mat-table>
+
+			<mat-paginator #paging *ngIf="AccessRights && AccessRights.length > 0" [length]="TotalRecords"
+						   [pageSize]="PageSize" [pageSizeOptions]="PageSizeOptions"
+						   (page)="LoadAccessRights($event)">
+			</mat-paginator>
+		</div>
+
+		<div class="push-out">
+			<a mat-raised-button class="push-left" (click)="ManageClaim(null)">Add New Claim</a>
+
+			<a mat-raised-button color="primary" class="push-left" (click)="SaveClaims()" [disabled]="!HasChanges">Save Claims</a>
+		</div>
+
+		<div class="error" *ngIf="Error">
+			{{Error}}
+		</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'Settings'">
+		<h2>Coming Soon</h2>
+	</ng-container>
+</div>
+
+<div *ngIf="Loading.Value"><mat-spinner></mat-spinner></div>

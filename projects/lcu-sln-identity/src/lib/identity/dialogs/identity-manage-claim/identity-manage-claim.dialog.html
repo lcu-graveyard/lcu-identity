@@ -1,0 +1,21 @@
+<form #form="ngForm" (ngSubmit)="Save()">
+	<h2 mat-dialog-title>
+		<span *ngIf="IsCreate">Create new User Claim</span>
+
+		<span *ngIf="!IsCreate">Manage Claim: {{this.Claim.ClaimType}}</span>
+	</h2>
+
+	<div mat-dialog-content>
+		<mat-form-field>
+			<input matInput placeholder="Claim Type" [(ngModel)]="this.Claim.ClaimType" name="type" *ngIf="IsCreate" required />
+		</mat-form-field>
+	
+		<mat-form-field>
+			<input matInput placeholder="Claim Value" [(ngModel)]="this.Claim.Value" name="value" required />
+		</mat-form-field>
+	</div>
+
+	<div mat-dialog-actions>
+		<button mat-raised-button type="submit" [disabled]="!form.form.valid">Save</button>
+	</div>
+</form>

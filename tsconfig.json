@@ -1,0 +1,54 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@lcu/identity": [
+        "dist/common"
+      ],
+      "@lcu/identity/*": [
+        "dist/common/*"
+      ],
+      "@lowcodeunit/lcu-el-sign-in": [
+        "dist/lcu-el-sign-in"
+      ],
+      "@lowcodeunit/lcu-el-sign-in/*": [
+        "dist/lcu-el-sign-in/*"
+      ],
+      "@lowcodeunit/lcu-el-register": [
+        "dist/lcu-el-register"
+      ],
+      "@lowcodeunit/lcu-el-register/*": [
+        "dist/lcu-el-register/*"
+      ],
+      "@lowcodeunit/lcu-el-recover-password": [
+        "dist/lcu-el-recover-password"
+      ],
+      "@lowcodeunit/lcu-el-recover-password/*": [
+        "dist/lcu-el-recover-password/*"
+      ],
+      "@lowcodeunit/lcu-sln-identity": [
+        "dist/lcu-sln-identity"
+      ],
+      "@lowcodeunit/lcu-sln-identity/*": [
+        "dist/lcu-sln-identity/*"
+      ]
+    }
+  }
+}
