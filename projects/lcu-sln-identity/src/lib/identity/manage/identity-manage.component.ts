@@ -6,6 +6,8 @@ import { ClaimModel, OrganizationIdentityModel, AccessRightModel, AccessConfigMo
 import { Pageable } from '@lcu/common';
 import { PageUIService, ForgeOrganizationIdentityService } from '@lcu/daf-common';
 import { PageEvent, MatPaginator } from '@angular/material';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FacebookLoginModel, GoogleLoginModel } from 'projects/common/src/lcu.api';
 
 
 @Component({
@@ -34,6 +36,14 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public ClaimsColumnsToDisplay: string[];
     
         public Error: string;
+
+        public FacebookLoginFormGroup: FormGroup;
+
+        public FacebookToggle: boolean;
+        
+        public GoogleLoginFormGroup: FormGroup;
+
+        public GoogleToggle: boolean;
     
         public get HasChanges(): boolean {
             return this.claimsCheck != JSON.stringify(this.Claims);
@@ -61,7 +71,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public UsersColumnsToDisplay: string[];
     
         //  Constructors
-        constructor(protected orgIdSvc: ForgeOrganizationIdentityService, protected pgUiSvc: PageUIService,
+        constructor(protected orgIdSvc: ForgeOrganizationIdentityService, protected pgUiSvc: PageUIService, protected formBldr: FormBuilder,
             protected injector: Injector) {
             super(injector);
     
@@ -89,6 +99,15 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             super.ngOnInit();
     
             this.SetManageState('Users');
+
+            this.FacebookLoginFormGroup = this.formBldr.group({
+                fbappid: new FormControl(''),
+                appsecret: new FormControl(''),
+            })
+
+            this.GoogleLoginFormGroup = this.formBldr.group({
+                googleappid: new FormControl(''),
+            })
         }
     
         //	API Methods
@@ -318,4 +337,16 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         }
     
         //	Helpers
+        protected buildFacebookModelFromForm(): FacebookLoginModel {
+            return{
+                AppID: this.FacebookLoginFormGroup.get('appid').value,
+                AppSecret: this.FacebookLoginFormGroup.get('appsecret').value,
+            }
+        }
+
+        protected buildGoogleModelFromForm(): GoogleLoginModel {
+            return{
+                AppID: this.GoogleLoginFormGroup.get('appid').value,
+            }
+        }
 }   
