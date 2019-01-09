@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatListModule, MatToolbarModule, MatIconModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatDialogModule } from '@angular/material';
+import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatListModule, MatTabsModule, MatToolbarModule, MatIconModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatDialogModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FathymSharedModule } from '@lcu/hosting';
 import { BaseSolutionModule } from '@lcu/solutions';
 import { NgxMarkdownDocsModule } from '@lowcodeunit/ngx-markdown-docs';
@@ -61,7 +62,9 @@ var comps = [
 		MatSelectModule,
 		MatSlideToggleModule,
 		MatTableModule,
+		MatTabsModule,
 		MatToolbarModule,
+		ReactiveFormsModule
 	],
 	declarations: [
 		...comps,
