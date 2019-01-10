@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatListModule, MatToolbarModule, MatIconModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatDialogModule } from '@angular/material';
+import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatListModule, MatToolbarModule, MatIconModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatDialogModule, MatTabsModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FathymSharedModule } from '@lcu/hosting';
 import { BaseSolutionModule } from '@lcu/solutions';
@@ -59,7 +59,8 @@ var comps = [
 		MatPaginatorModule,
 		MatProgressSpinnerModule,
 		MatSelectModule,
-		MatSlideToggleModule,
+    MatSlideToggleModule,
+    MatTabsModule,
 		MatTableModule,
 		MatToolbarModule,
 	],

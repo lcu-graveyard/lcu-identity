@@ -5,7 +5,7 @@ import { ForgeIdentitySignInBuilderComponent } from './identity-sign-in-builder/
 import { ForgeIdentitySignInMarketplaceComponent } from './identity-sign-in-marketplace/identity-sign-in-marketplace.component';
 import { ForgeIdentitySignInRenderComponent } from './identity-sign-in-render/identity-sign-in-render.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ForgeSignInModule } from '@lcu/daf-ui';
+import { ForgeSignInModule } from '@lcu/identity';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { BaseDisplayModule } from '@lcu/elements';
