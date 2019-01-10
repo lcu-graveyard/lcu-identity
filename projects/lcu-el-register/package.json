@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "@lowcodeunit/lcu-el-register",
   "version": "0.0.5",
+=======
+  "name": "@lowcodeunit/lcu-el-identity-register",
+  "version": "0.0.12",
+>>>>>>> 75066ef2743d34a08a6a757d074ab9832203abe1
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"

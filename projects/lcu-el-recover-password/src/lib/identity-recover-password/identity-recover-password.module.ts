@@ -7,7 +7,7 @@ import { ForgeIdentityRecoverPasswordRenderComponent } from './identity-recover-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
-import { ForgeRecoverPasswordModule } from '@lcu/daf-ui';
+import { ForgeRecoverPasswordModule } from '@lcu/identity';
 
 export class ForgeIdentityRecoverPasswordDisplayModule extends BaseDisplayModule {
 	public Builder() {

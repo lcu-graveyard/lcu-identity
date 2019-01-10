@@ -1,6 +1,10 @@
 {
 	"name": "@lowcodeunit/lcu-repository",
+<<<<<<< HEAD
 	"version": "0.0.13",
+=======
+	"version": "0.0.18",
+>>>>>>> 75066ef2743d34a08a6a757d074ab9832203abe1
 	"scripts": {
 		"deploy": "npm version patch && npm run deploy:all",
 		"deploy:all": "npm run deploy:common && parallelshell \"npm run deploy:lcu-el-sign-in\" \"npm run deploy:lcu-el-register\" \"npm run deploy:lcu-el-recover-password\" \"npm run deploy:lcu-sln-identity\"",
@@ -35,8 +39,8 @@
 		"@lcu/apps": "0.0.21",
 		"@lcu/common": "0.0.21",
 		"@lcu/core": "0.0.21",
-		"@lcu/daf-common": "0.0.72",
-		"@lcu/daf-ui": "0.0.72",
+		"@lcu/daf-common": "0.0.75",
+		"@lcu/daf-ui": "0.0.75",
 		"@lcu/elements": "0.0.21",
 		"@lcu/enterprises": "0.0.3",
 		"@lcu/hosting": "0.0.21",

@@ -3,7 +3,7 @@ import { FathymSharedModule } from '@lcu/hosting';
 import { ForgeIdentityRegisterBuilderComponent } from './identity-register-builder/identity-register-builder.component';
 import { ForgeIdentityRegisterMarketplaceComponent } from './identity-register-marketplace/identity-register-marketplace.component';
 import { ForgeIdentityRegisterRenderComponent } from './identity-register-render/identity-register-render.component';
-import { ForgeRegisterModule } from '@lcu/daf-ui';
+import { ForgeRegisterModule } from '@lcu/identity';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatStepperModule } from '@angular/material';

@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatListModule, MatTabsModule, MatToolbarModule, MatIconModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatDialogModule } from '@angular/material';
+=======
+import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatListModule, MatToolbarModule, MatIconModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatDialogModule, MatTabsModule } from '@angular/material';
+>>>>>>> 75066ef2743d34a08a6a757d074ab9832203abe1
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FathymSharedModule } from '@lcu/hosting';
@@ -60,7 +64,8 @@ var comps = [
 		MatPaginatorModule,
 		MatProgressSpinnerModule,
 		MatSelectModule,
-		MatSlideToggleModule,
+    MatSlideToggleModule,
+    MatTabsModule,
 		MatTableModule,
 		MatTabsModule,
 		MatToolbarModule,

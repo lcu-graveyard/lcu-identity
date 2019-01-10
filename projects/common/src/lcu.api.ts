@@ -1,3 +1,4 @@
+export * from './lib/controls/identity.api';
 export * from './lib/confirm-password-recovery-model';
 export * from './lib/identity-options';
 export * from './lib/identity.service';
