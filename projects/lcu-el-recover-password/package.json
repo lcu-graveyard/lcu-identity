@@ -1,5 +1,5 @@
 {
-  "name": "@lowcodeunit/lcu-el-recover-password",
+  "name": "@lowcodeunit/lcu-el-identity-recover-password",
   "version": "0.0.11",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
