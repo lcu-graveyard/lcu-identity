@@ -207,7 +207,7 @@
 	<ng-container *ngSwitchCase="'Settings'">
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers
-				<mat-slide-toggle [name] = "FacebookToggle">Enable Facebook Login</mat-slide-toggle>
+				<mat-slide-toggle [name] = "FacebookToggle">Enable Facebook Login </mat-slide-toggle>
 					<form [formGroup]="FacebookLoginFormGroup" [hidden]="!FacebookToggle">
 						<mat-form-field>
 							<input matInput placeholder="App ID" formControlName="fbappid">
