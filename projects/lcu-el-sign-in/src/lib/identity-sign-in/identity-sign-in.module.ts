@@ -7,7 +7,7 @@ import { ForgeIdentitySignInRenderComponent } from './identity-sign-in-render/id
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForgeSignInModule } from '@lcu/identity';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatSlideToggleModule } from '@angular/material';
 import { BaseDisplayModule } from '@lcu/elements';
 
 export class ForgeIdentitySignInDisplayModule extends BaseDisplayModule {
@@ -41,6 +41,7 @@ var comps = [
 		MatFormFieldModule,
 		MatInputModule,
 		MatProgressSpinnerModule,
+		MatSlideToggleModule,
 	],
 	declarations: [
 		...comps,

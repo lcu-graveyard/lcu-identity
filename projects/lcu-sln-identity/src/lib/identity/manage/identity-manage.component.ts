@@ -335,6 +335,16 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                     break;
             }
         }
+
+        public OnProviderToggleChange(value){
+            if (value.isChecked === true) {
+                this.FacebookToggle = true;            
+            }
+
+            if (value.isChecked === false) {
+                this.FacebookToggle = false;
+            }
+        }
     
         //	Helpers
         protected buildFacebookModelFromForm(): FacebookLoginModel {
