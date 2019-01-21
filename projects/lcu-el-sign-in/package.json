@@ -1,6 +1,6 @@
 {
   "name": "@lowcodeunit/lcu-el-sign-in",
-  "version": "0.0.4",
+  "version": "0.0.18",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
