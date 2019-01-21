@@ -3,7 +3,7 @@
 	"version": "0.0.28",
 	"scripts": {
 		"deploy": "npm version patch && npm run deploy:all",
-		"deploy:all": "npm run deploy:common && npm run deploy:lcu-el-sign-in && npm run deploy:lcu-el-register && npm run deploy:lcu-el-recover-password && npm run deploy:lcu-sln-identity",
+		"deploy:all": "npm run deploy:common && concurrently \"npm:deploy:lcu-el-sign-in\" \"npm:deploy:lcu-el-register\" \"npm:deploy:lcu-el-recover-password\" \"npm:deploy:lcu-sln-identity\"",
 		"deploy:common": "npm version patch --prefix projects/common && ng build common && npm publish ./dist/common --access public",
 		"deploy:lcu-el-recover-password": "npm version patch --prefix projects/lcu-el-recover-password && ng build lcu-el-recover-password && npm publish ./dist/lcu-el-recover-password --access public",
 		"deploy:lcu-el-register": "npm version patch --prefix projects/lcu-el-register && ng build lcu-el-register && npm publish ./dist/lcu-el-register --access public",
