@@ -10,6 +10,7 @@ import { ForgeIdentitySolutionHeading } from './heading/identity-heading.compone
 import { ForgeIdentitySolutionMarketplace } from './marketplace/identity-marketplace.component';
 import { ForgeIdentitySolutionOverview } from './overview/identity-overview.component';
 import { ForgeIdentitySolutionManageClaimDialog } from './dialogs/identity-manage-claim/identity-manage-claim.dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 export class ForgeIdentitySolutionDisplayModule extends BaseSolutionModule {
@@ -45,7 +46,8 @@ var comps = [
 
 @NgModule({
 	imports: [
-		FathymSharedModule,
+    FathymSharedModule,
+    ReactiveFormsModule,
 		NgxMarkdownDocsModule,
 		FlexLayoutModule,
 		MatAutocompleteModule,
