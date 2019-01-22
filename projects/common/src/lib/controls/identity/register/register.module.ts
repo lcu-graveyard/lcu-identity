@@ -9,6 +9,8 @@ import { FathymSharedModule } from '@lcu/hosting';
 
 import { RegisterComponent } from './register.component';
 
+import { GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule, AuthServiceConfig } from 'angularx-social-login'
+
 @NgModule({
 	imports: [
 		FathymSharedModule,
@@ -19,6 +21,9 @@ import { RegisterComponent } from './register.component';
 		MatInputModule,
 		MatProgressSpinnerModule,
 		MatStepperModule,
+		FacebookLoginProvider,
+		GoogleLoginProvider,
+		SocialLoginModule,
 	],
 	declarations: [
 		RegisterComponent
