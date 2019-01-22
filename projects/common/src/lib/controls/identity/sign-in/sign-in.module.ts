@@ -9,7 +9,7 @@ import { FathymSharedModule } from '@lcu/hosting';
 
 import { ForgeSignInComponent } from './sign-in.component';
 
-import { GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule, AuthServiceConfig } from 'angularx-social-login'
+import { GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login'
 
 
 @NgModule({
@@ -23,8 +23,6 @@ import { GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule, AuthServ
 		MatInputModule,
 		MatProgressSpinnerModule,
 		SocialLoginModule,
-		GoogleLoginProvider,
-		FacebookLoginProvider,
 	],
 	declarations: [
 		ForgeSignInComponent

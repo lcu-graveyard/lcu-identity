@@ -7,7 +7,7 @@ import { Pageable, isStatusSuccess } from '@lcu/common';
 import { PageUIService, ForgeOrganizationIdentityService, LoginProviderService, LoginProviderConfigContext } from '@lcu/daf-common';
 import { PageEvent, MatPaginator } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { FacebookLoginModel, GoogleLoginModel } from '@lcu/identity';
+import { GoogleLoginModel, FacebookLoginModel } from '@lcu/identity/lcu.api';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
     implements ISolutionControl {
         //  Fields
         protected claimsCheck: string;
-    
+        
         //  Properties
         public AccessConfigs: AccessConfigModel[];
     

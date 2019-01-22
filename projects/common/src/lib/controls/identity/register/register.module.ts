@@ -21,8 +21,6 @@ import { GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule, AuthServ
 		MatInputModule,
 		MatProgressSpinnerModule,
 		MatStepperModule,
-		FacebookLoginProvider,
-		GoogleLoginProvider,
 		SocialLoginModule,
 	],
 	declarations: [
