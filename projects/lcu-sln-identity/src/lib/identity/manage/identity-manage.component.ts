@@ -2,9 +2,9 @@ import { Component, Injector, ViewChild } from '@angular/core';
 import { ISolutionControl, ForgeGenericSolution } from '@lcu/solutions';
 import { isResultSuccess, BaseResponse, BaseModeledResponse, Loading } from '@lcu/core';
 import { ForgeIdentitySolutionManageClaimDialog } from '../dialogs/identity-manage-claim/identity-manage-claim.dialog';
-import { ClaimModel, OrganizationIdentityModel, AccessRightModel, AccessConfigModel } from '@lcu/apps';
-import { Pageable } from '@lcu/common';
-import { PageUIService, ForgeOrganizationIdentityService } from '@lcu/daf-common';
+import { ClaimModel, OrganizationIdentityModel, AccessRightModel, AccessConfigModel, LoginProviderConfig } from '@lcu/apps';
+import { Pageable, isStatusSuccess } from '@lcu/common';
+import { PageUIService, ForgeOrganizationIdentityService, LoginProviderService, LoginProviderConfigContext } from '@lcu/daf-common';
 import { PageEvent, MatPaginator } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { FacebookLoginModel, GoogleLoginModel } from '@lcu/identity';
@@ -59,6 +59,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
     
         @ViewChild(MatPaginator)
         public Paging: MatPaginator;
+
+        public ProviderConfig: LoginProviderConfig;
     
         public ManageState: string;
     
@@ -71,8 +73,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public UsersColumnsToDisplay: string[];
     
         //  Constructors
-        constructor(protected orgIdSvc: ForgeOrganizationIdentityService, protected pgUiSvc: PageUIService, protected formBldr: FormBuilder,
-            protected injector: Injector) {
+        constructor(protected orgIdSvc: ForgeOrganizationIdentityService, protected pgUiSvc: PageUIService, protected formBldr: FormBuilder, protected providerSvc: LoginProviderService,
+            protected providerConfig: LoginProviderConfigContext, protected injector: Injector) {
             super(injector);
     
             this.Loading = new Loading();
@@ -97,7 +99,11 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         //	Life Cycle
         public ngOnInit() {
             super.ngOnInit();
-    
+            
+            this.providerConfig.Loading.subscribe(loading => this.Loading.Set(loading));
+
+            this.providerConfig.Context.subscribe(providerConfig => this.ProviderConfig = providerConfig);
+
             this.SetManageState('Users');
 
             this.FacebookLoginFormGroup = this.formBldr.group({
@@ -345,11 +351,38 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                 this.FacebookToggle = false;
             }
         }
+        
+        public SaveConfig() {
+            this.Loading.Set(true);
     
+            var facebookConfig = this.buildFacebookModelFromForm();
+    
+            this.ProviderConfig.FacebookConfigs["default"] = facebookConfig;
+    
+            this.providerConfig.Save(this.ProviderConfig).subscribe(
+                (status) => {
+                    if (isStatusSuccess(status)) {
+                        this.pgUiSvc.Notify.Signal("Facebook Configuration saved successfully");
+                    } else {
+                        console.log(status);
+    
+                        this.pgUiSvc.Notify.Signal(status.Message);
+                    }
+                },
+                (err) => {
+                    console.log(err);
+    
+                    this.pgUiSvc.Notify.Signal("Unknown error. Please try again, or contact support if the problem continues");
+                },
+                () => {
+                    this.Loading.Set(false);
+                });
+        }
+
         //	Helpers
         protected buildFacebookModelFromForm(): FacebookLoginModel {
             return{
-                AppID: this.FacebookLoginFormGroup.get('appid').value,
+                AppID: this.FacebookLoginFormGroup.get('fbappid').value,
                 AppSecret: this.FacebookLoginFormGroup.get('appsecret').value,
             }
         }

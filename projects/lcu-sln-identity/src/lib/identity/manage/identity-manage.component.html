@@ -207,14 +207,14 @@
 	<ng-container *ngSwitchCase="'Settings'">
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers
-					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="">
+					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveConfig()">
 						<mat-form-field>
 							<input matInput placeholder="Facebook App ID" formControlName="fbappid">
 						</mat-form-field>
 						<mat-form-field>
 							<input matInput placeholder="Facebook App Secret" formControlName="appsecret">
 						</mat-form-field>
-						<button mat-raised-button color="primary" class="mat-button-lg" type="submit" [disabled]="!ConfirmPasswordRecoveryFormGroup.valid">
+						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
 							Save
 						</button>
 					</form>
