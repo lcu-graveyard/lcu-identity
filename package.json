@@ -1,6 +1,6 @@
 {
 	"name": "@lowcodeunit/lcu-repository",
-	"version": "0.0.19",
+	"version": "0.0.35",
 	"scripts": {
 		"deploy": "npm version patch && npm run deploy:all",
 		"deploy:all": "npm run deploy:common && parallelshell \"npm run deploy:lcu-el-sign-in\" \"npm run deploy:lcu-el-register\" \"npm run deploy:lcu-el-recover-password\" \"npm run deploy:lcu-sln-identity\"",
