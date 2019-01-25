@@ -17,6 +17,8 @@ export class ForgeIdentitySignInRenderComponent
 	
 		//  Properties
 		public SchemaMap: JSONSchemaMap;
+
+		public DisplayProvidersValue: boolean;
 	
 		//  Constructors
 		constructor(protected injector: Injector) {
@@ -26,6 +28,11 @@ export class ForgeIdentitySignInRenderComponent
 		//	Life Cycle
 	
 		//	API Methods
+		public DisplayProviders() {
+			this.DisplayProvidersValue = this.Details.DisplayProviders;
+			return this.DisplayProvidersValue
+		}
+
 		public SignedIn() {
 			location.href = this.Details.SignInRedirect;
 		}

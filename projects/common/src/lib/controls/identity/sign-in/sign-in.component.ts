@@ -22,6 +22,9 @@ export class ForgeSignInComponent implements OnInit {
     public Loading: boolean;
 
 	public RedirectTo: string;
+	
+	@Input('display-providers')
+	public DisplayProviders: boolean;
 
 	@Output('signed-in')
     public SignedIn: EventEmitter<{ Status: Status, RedirectTo: string }> = new EventEmitter<{ Status: Status, RedirectTo: string }>();
