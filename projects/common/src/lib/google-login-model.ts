@@ -1,4 +1,4 @@
 export class GoogleLoginModel {
-	public AppID: string;
+	public AppID: string; 
 }
 
