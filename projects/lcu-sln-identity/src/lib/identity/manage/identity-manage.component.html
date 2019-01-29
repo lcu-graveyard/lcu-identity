@@ -218,8 +218,8 @@
 							Save
 						</button>
 					</form>
-				<mat-slide-toggle name = "GoogleToggle">Enable Google Login Test</mat-slide-toggle>
-					<form [formGroup]="GoogleLoginFormGroup" [hidden]="!GoogleToggle">
+				<mat-slide-toggle ([ngModel]) = "GoogleToggle">Enable Google Login Test</mat-slide-toggle>
+					<form [formGroup]="GoogleLoginFormGroup" *ngIf="GoogleToggle">
 						<mat-form-field>
 							<input matInput placeholder="App ID" formControlName="googleappid">
 						</mat-form-field>

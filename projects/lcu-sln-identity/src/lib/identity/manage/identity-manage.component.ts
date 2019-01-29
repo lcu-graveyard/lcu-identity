@@ -10,6 +10,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { GoogleLoginModel, FacebookLoginModel } from '@lcu/identity/lcu.api';
 
 
+
 @Component({
     selector: 'forge-solution-identity-manage',
     templateUrl: './identity-manage.component.html',
@@ -34,6 +35,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public Claims: ClaimModel[];
     
         public ClaimsColumnsToDisplay: string[];
+
+        public DisplayGoogle: boolean;
     
         public Error: string;
 
