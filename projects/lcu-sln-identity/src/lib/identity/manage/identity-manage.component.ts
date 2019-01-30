@@ -107,6 +107,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             this.SetManageState('Users');
 
             this.FacebookLoginFormGroup = this.formBldr.group({
+                fbtoggle: new FormControl(),
                 fbappid: new FormControl(''),
                 appsecret: new FormControl(''),
             })
@@ -347,8 +348,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             var facebookConfig = this.buildFacebookModelFromForm();
 
             var googleConfig = this.buildGoogleModelFromForm();
-
-             this.SaveProvider(facebookConfig, googleConfig);
+            
+            this.SaveProvider(facebookConfig, googleConfig);
             
         }
         
@@ -429,6 +430,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         protected buildFacebookModelFromForm(): FacebookLoginModel {
             return{
                 Name: "Facebook Login Provider",
+                SaveToggle: this.FacebookLoginFormGroup.get('fbtoggle').value,
                 Description: "Login Provider for Facebook",
                 Type: "facebook",
                 AppID: this.FacebookLoginFormGroup.get('fbappid').value,
@@ -439,6 +441,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         protected buildGoogleModelFromForm(): GoogleLoginModel {
             return{
                 Name: "Google Login Provider",
+                SaveToggle: this.GoogleLoginFormGroup.get('googletoggle').value,
                 Description: "Login Provider for Google",
                 Type: "google",
                 AppID: this.GoogleLoginFormGroup.get('appid').value,
