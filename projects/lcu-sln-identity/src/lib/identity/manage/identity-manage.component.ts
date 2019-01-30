@@ -353,7 +353,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
             var metadata;
 
-            if (provider = "facebook"){
+            if (provider === "facebook"){
                 config = this.buildFacebookModelFromForm();
 
                 metadata = {
@@ -362,7 +362,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                 };
             }
 
-            if (provider = "google"){
+            if (provider === "google"){
                 config = this.buildGoogleModelFromForm();
 
                 metadata = {
