@@ -343,19 +343,61 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             }
         }
 
-        public onChange(){
+        public buildFormsForSubmit(){
+            var facebookConfig = this.buildFacebookModelFromForm();
 
+            var googleConfig = this.buildGoogleModelFromForm();
+
+             this.SaveProvider(facebookConfig, googleConfig);
             
         }
         
-        public SaveProvider(){
+        public SaveProvider(fbConfig: FacebookLoginModel, googleConfig: GoogleLoginModel){
             this.Loading.Set(true);
 
-            var facebookConfig = this.buildFacebookModelFromForm();
+            
+            var metadata = {
+                AppID: fbConfig.AppID,
+                AppSecret: fbConfig.AppSecret
+            };
 
+            this.orgIdSvc.SaveProvider(fbConfig.Name, fbConfig.Description, fbConfig.Type, metadata).subscribe(
+                (result: BaseResponse) => {
+                    if (isResultSuccess(result)) {
+                        this.orgIdSvc.SaveProvider(googleConfig.Name, googleConfig.Description, googleConfig.Type, googleConfig.AppID).subscribe(
+                            (result: BaseResponse) => {
+                                if (isResultSuccess(result)) {
+                                    this.pgUiSvc.Notify.Signal("Provider configurations saved successfully");
+                                }
+                                else {
+                                    this.Error = result.Status.Message;
+                                }
+                            },                
+                            (err) => {
+                                console.log(err);
+                
+                                this.Error = err;
+                            },
+                            () => {
+                                this.Loading.Set(false);
+                            });
 
+                    } else {
+                        this.Error = result.Status.Message;
+                    }
+                },
+                (err) => {
+                    console.log(err);
+    
+                    this.Error = err;
+                },
+                () => {
+                    this.Loading.Set(false);
+                });
 
+            
         }
+
         public SaveConfig() {
             // this.Loading.Set(true);
     

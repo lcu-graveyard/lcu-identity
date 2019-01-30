@@ -207,23 +207,25 @@
 	<ng-container *ngSwitchCase="'Settings'">
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers
-					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveConfig()">
+					<form [formGroup]="FacebookLoginFormGroup">
 						<mat-form-field>
 							<input matInput placeholder="Facebook App ID" formControlName="fbappid">
 						</mat-form-field>
 						<mat-form-field>
 							<input matInput placeholder="Facebook App Secret" formControlName="appsecret">
 						</mat-form-field>
-						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
-							Save
-						</button>
 					</form>
 				<mat-slide-toggle>Enable Google Login Test</mat-slide-toggle>
 					<form [formGroup]="GoogleLoginFormGroup" *ngIf="GoogleToggle">
 						<mat-form-field>
 							<input matInput placeholder="App ID" formControlName="googleappid">
 						</mat-form-field>
+
 					</form>
+				<button mat-raised-button color="primary" class="mat-button-lg" (click)="buildFormsForSubmit()">
+						Save
+				</button>
+
 			</mat-tab>
 			<mat-tab label="Second"> Content 2</mat-tab>
 			<mat-tab label="Third"> Content 3 </mat-tab>
