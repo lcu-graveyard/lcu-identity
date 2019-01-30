@@ -1,11 +1,11 @@
-import { Component, Injector, ViewChild } from '@angular/core';
+import { Component, Injector, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ISolutionControl, ForgeGenericSolution } from '@lcu/solutions';
 import { isResultSuccess, BaseResponse, BaseModeledResponse, Loading } from '@lcu/core';
 import { ForgeIdentitySolutionManageClaimDialog } from '../dialogs/identity-manage-claim/identity-manage-claim.dialog';
 import { ClaimModel, OrganizationIdentityModel, AccessRightModel, AccessConfigModel } from '@lcu/apps';
 import { Pageable, isStatusSuccess } from '@lcu/common';
 import { PageUIService, ForgeOrganizationIdentityService } from '@lcu/daf-common';
-import { PageEvent, MatPaginator } from '@angular/material';
+import { PageEvent, MatPaginator, MatSlideToggleChange } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { GoogleLoginModel, FacebookLoginModel } from '@lcu/identity/lcu.api';
 
@@ -31,7 +31,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public AccessRights: AccessRightModel[];
     
         public AccessRightsColumnsToDisplay: string[];
-    
+
         public Claims: ClaimModel[];
     
         public ClaimsColumnsToDisplay: string[];
@@ -112,6 +112,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             })
 
             this.GoogleLoginFormGroup = this.formBldr.group({
+                googletoggle: new FormControl(),
                 googleappid: new FormControl(''),
             })
         }
@@ -342,16 +343,19 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             }
         }
 
-        public OnProviderToggleChange(value){
-            if (value.isChecked === true) {
-                this.FacebookToggle = true;            
-            }
+        public onChange(){
 
-            if (value.isChecked === false) {
-                this.FacebookToggle = false;
-            }
+            
         }
         
+        public SaveProvider(){
+            this.Loading.Set(true);
+
+            var facebookConfig = this.buildFacebookModelFromForm();
+
+
+
+        }
         public SaveConfig() {
             // this.Loading.Set(true);
     
@@ -382,13 +386,19 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         //	Helpers
         protected buildFacebookModelFromForm(): FacebookLoginModel {
             return{
+                Name: "Facebook Login Provider",
+                Description: "Login Provider for Facebook",
+                Type: "facebook",
                 AppID: this.FacebookLoginFormGroup.get('fbappid').value,
                 AppSecret: this.FacebookLoginFormGroup.get('appsecret').value,
-            }
+            } 
         }
 
         protected buildGoogleModelFromForm(): GoogleLoginModel {
             return{
+                Name: "Google Login Provider",
+                Description: "Login Provider for Google",
+                Type: "google",
                 AppID: this.GoogleLoginFormGroup.get('appid').value,
             }
         }
