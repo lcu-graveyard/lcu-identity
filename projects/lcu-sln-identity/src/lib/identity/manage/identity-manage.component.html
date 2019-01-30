@@ -207,7 +207,7 @@
 	<ng-container *ngSwitchCase="'Settings'">
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers				
-					<form [formGroup]="FacebookLoginFormGroup">
+					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveProvider('facebook')">
 						<mat-slide-toggle matInput formControlName="fbtoggle">Enable Facebook Login</mat-slide-toggle>
 						<mat-form-field>
 							<input matInput placeholder="Facebook App ID" formControlName="fbappid">
@@ -215,18 +215,21 @@
 						<mat-form-field>
 							<input matInput placeholder="Facebook App Secret" formControlName="appsecret">
 						</mat-form-field>
+						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
+								Save
+						</button>
 					</form>
 			
-					<form [formGroup]="GoogleLoginFormGroup">
+					<form [formGroup]="GoogleLoginFormGroup" (ngSubmit)="SaveProvider('google')">
 						<mat-slide-toggle formControlName="googletoggle">Enable Google Login</mat-slide-toggle>
 						<mat-form-field>
 							<input matInput placeholder="App ID" formControlName="googleappid">
 						</mat-form-field>
-
+						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
+								Save
+						</button>
 					</form>
-				<button mat-raised-button color="primary" class="mat-button-lg" (click)="buildFormsForSubmit()">
-						Save
-				</button>
+
 
 			</mat-tab>
 			<mat-tab label="Second"> Content 2</mat-tab>

@@ -344,44 +344,37 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             }
         }
 
-        public buildFormsForSubmit(){
-            var facebookConfig = this.buildFacebookModelFromForm();
 
-            var googleConfig = this.buildGoogleModelFromForm();
-            
-            this.SaveProvider(facebookConfig, googleConfig);
-            
-        }
         
-        public SaveProvider(fbConfig: FacebookLoginModel, googleConfig: GoogleLoginModel){
+        public SaveProvider(provider: string){
             this.Loading.Set(true);
 
-            
-            var metadata = {
-                AppID: fbConfig.AppID,
-                AppSecret: fbConfig.AppSecret
-            };
+            var config;
 
-            this.orgIdSvc.SaveProvider(fbConfig.Name, fbConfig.Description, fbConfig.Type, metadata).subscribe(
+            var metadata;
+
+            if (provider = "facebook"){
+                config = this.buildFacebookModelFromForm();
+
+                metadata = {
+                    AppID: config.AppID,
+                    AppSecret: config.AppSecret
+                };
+            }
+
+            if (provider = "google"){
+                config = this.buildGoogleModelFromForm();
+
+                metadata = {
+                    AppID: config.AppID,
+                    AppSecret: ""
+                };
+            }
+            
+            this.orgIdSvc.SaveProvider(config.Name, config.Description, config.Type, metadata).subscribe(
                 (result: BaseResponse) => {
                     if (isResultSuccess(result)) {
-                        this.orgIdSvc.SaveProvider(googleConfig.Name, googleConfig.Description, googleConfig.Type, googleConfig.AppID).subscribe(
-                            (result: BaseResponse) => {
-                                if (isResultSuccess(result)) {
-                                    this.pgUiSvc.Notify.Signal("Provider configurations saved successfully");
-                                }
-                                else {
-                                    this.Error = result.Status.Message;
-                                }
-                            },                
-                            (err) => {
-                                console.log(err);
-                
-                                this.Error = err;
-                            },
-                            () => {
-                                this.Loading.Set(false);
-                            });
+                        this.pgUiSvc.Notify.Signal("Configuration saved successfully");
 
                     } else {
                         this.Error = result.Status.Message;
