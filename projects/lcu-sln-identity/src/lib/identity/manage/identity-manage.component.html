@@ -208,12 +208,12 @@
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers				
 					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveProvider('facebook')">
-						<mat-slide-toggle matInput formControlName="fbtoggle">Enable Facebook Login</mat-slide-toggle>
+						<mat-slide-toggle matInput formControlName="fbtoggle" [checked]="CurrentFacebookProvider">Enable Facebook Login</mat-slide-toggle>
 						<mat-form-field>
-							<input matInput placeholder="Facebook App ID" formControlName="fbappid">
+							<input matInput placeholder="Facebook App ID" formControlName="fbappid" [value]="CurrentFacebookProvider?.Metadata['AppID']">
 						</mat-form-field>
 						<mat-form-field>
-							<input matInput placeholder="Facebook App Secret" formControlName="appsecret">
+							<input matInput placeholder="Facebook App Secret" formControlName="appsecret" [value]="CurrentFacebookProvider?.Metadata['AppSecret']">
 						</mat-form-field>
 						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
 								Save
