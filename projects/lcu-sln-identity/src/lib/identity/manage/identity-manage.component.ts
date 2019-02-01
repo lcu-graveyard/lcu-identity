@@ -90,6 +90,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             this.Claims = [];
     
             this.ClaimsColumnsToDisplay = ['ClaimType', 'Value', 'Actions'];
+
+            this.CurrentFacebookProvider = new ProviderModel();
     
             this.Users = [];
     
@@ -107,7 +109,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             this.SetManageState('Users');
 
             this.GetProvider("facebook");
-            
+
             this.FacebookLoginFormGroup = this.formBldr.group({
                 fbtoggle: new FormControl(),
                 fbappid: new FormControl(''),
