@@ -2,7 +2,7 @@ import { Component, Injector, ViewChild, Output, EventEmitter } from '@angular/c
 import { ISolutionControl, ForgeGenericSolution } from '@lcu/solutions';
 import { isResultSuccess, BaseResponse, BaseModeledResponse, Loading } from '@lcu/core';
 import { ForgeIdentitySolutionManageClaimDialog } from '../dialogs/identity-manage-claim/identity-manage-claim.dialog';
-import { ClaimModel, OrganizationIdentityModel, AccessRightModel, AccessConfigModel } from '@lcu/apps';
+import { ClaimModel, OrganizationIdentityModel, AccessRightModel, AccessConfigModel, ProviderModel } from '@lcu/apps';
 import { Pageable, isStatusSuccess } from '@lcu/common';
 import { PageUIService, ForgeOrganizationIdentityService } from '@lcu/daf-common';
 import { PageEvent, MatPaginator, MatSlideToggleChange } from '@angular/material';
@@ -36,7 +36,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
     
         public ClaimsColumnsToDisplay: string[];
 
-        public DisplayGoogle: boolean;
+        public CurrentFacebookProvider: ProviderModel;
     
         public Error: string;
 
@@ -72,7 +72,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public Users: OrganizationIdentityModel[];
     
         public UsersColumnsToDisplay: string[];
-    
+        
         //  Constructors
         constructor(protected orgIdSvc: ForgeOrganizationIdentityService, protected pgUiSvc: PageUIService, protected formBldr: FormBuilder, protected injector: Injector) {
             super(injector);
@@ -106,6 +106,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
             this.SetManageState('Users');
 
+            this.GetProvider("facebook");
+            
             this.FacebookLoginFormGroup = this.formBldr.group({
                 fbtoggle: new FormControl(),
                 fbappid: new FormControl(''),
@@ -149,6 +151,26 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             return this.AccessRights.find(ar => ar.ID == id);
         }
     
+        public GetProvider(providerType: string) {
+            this.orgIdSvc.GetProvider(providerType).subscribe(
+                (result) => {
+                    if (isResultSuccess(result)) {
+                        this.CurrentFacebookProvider = result.Model;
+                    }
+                    else{
+                        this.Error = result.Status.Message;
+                    }
+                },
+                (err) => {
+                    console.log(err);
+    
+                    this.Error = err;
+                },
+                () => {
+                    this.Loading.Set(false);
+                });
+        }
+
         public LoadAccessConfigs(page: PageEvent) {
             this.Loading.Set(true);
     
@@ -233,7 +255,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                     this.Loading.Set(false);
                 });
         }
-    
+        
         public LoadUsers(page: PageEvent) {
             this.Loading.Set(true);
     
@@ -343,9 +365,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                     break;
             }
         }
-
-
-        
+     
         public SaveProvider(provider: string){
             this.Loading.Set(true);
 
