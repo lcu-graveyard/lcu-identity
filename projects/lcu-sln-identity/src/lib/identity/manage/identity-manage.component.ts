@@ -172,13 +172,21 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             this.orgIdSvc.GetProvider(providerType).subscribe(
                 (result) => {
                     if (isResultSuccess(result)) {
-                        this.CurrentFacebookProvider = result.Model;
+                        
 
-                        if(providerType == "facebook" && result.Model != null){
-                            this.FacebookToggle = true;
+                        if(providerType == "facebook" ){
+                            this.CurrentFacebookProvider = result.Model;
+
+                            if(result.Model != null)
+                                this.FacebookToggle = true;
                         }
-                        if(providerType == "google" && result.Model != null){
-                            this.GoogleToggle = true;
+
+
+                        if(providerType == "google" ){
+                            this.CurrentGoogleProvider = result.Model;
+
+                            if(result.Model != null)
+                                this.GoogleToggle = true;
                         }
                     }
                     else{
