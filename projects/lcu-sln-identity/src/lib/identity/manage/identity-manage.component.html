@@ -203,16 +203,15 @@
 			{{Error}}
 		</div>
 	</ng-container> 
-=""
 	<ng-container *ngSwitchCase="'Settings'">
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers				
 					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveProvider('facebook')">
 						<mat-slide-toggle matInput formControlName="fbtoggle" [(ngModel)]="FacebookToggle">Enable Facebook Login</mat-slide-toggle>
-						<mat-form-field>
+						<mat-form-field *ngIf="FacebookToggle">
 							<input matInput placeholder="Facebook App ID" formControlName="fbappid" [value]="CurrentFacebookProvider?.AppID">
 						</mat-form-field>
-						<mat-form-field>
+						<mat-form-field *ngIf="FacebookToggle">
 							<input matInput placeholder="Facebook App Secret" formControlName="appsecret" [value]="CurrentFacebookProvider?.AppSecret">
 						</mat-form-field>
 						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
@@ -221,8 +220,8 @@
 					</form>
 			
 					<form [formGroup]="GoogleLoginFormGroup" (ngSubmit)="SaveProvider('google')">
-						<mat-slide-toggle formControlName="googletoggle">Enable Google Login</mat-slide-toggle>
-						<mat-form-field>
+						<mat-slide-toggle formControlName="googletoggle" [(ngModel)]="GoogleToggle">Enable Google Login</mat-slide-toggle>
+						<mat-form-field *ngIf="GoogleToggle">
 							<input matInput placeholder="App ID" formControlName="googleappid">
 						</mat-form-field>
 						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
