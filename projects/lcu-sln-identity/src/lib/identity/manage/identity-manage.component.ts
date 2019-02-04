@@ -174,10 +174,10 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                     if (isResultSuccess(result)) {
                         this.CurrentFacebookProvider = result.Model;
 
-                        if(providerType == "facebook"){
+                        if(providerType == "facebook" && result.Model != null){
                             this.FacebookToggle = true;
                         }
-                        if(providerType == "google"){
+                        if(providerType == "google" && result.Model != null){
                             this.GoogleToggle = true;
                         }
                     }
