@@ -203,12 +203,12 @@
 			{{Error}}
 		</div>
 	</ng-container> 
-
+=""
 	<ng-container *ngSwitchCase="'Settings'">
 		<mat-tab-group>
 			<mat-tab label="Providers">Login Providers				
 					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveProvider('facebook')">
-						<mat-slide-toggle matInput formControlName="fbtoggle" [checked]="Test">Enable Facebook Login</mat-slide-toggle>
+						<mat-slide-toggle matInput formControlName="fbtoggle" [(ngModel)]="FacebookToggle">Enable Facebook Login</mat-slide-toggle>
 						<mat-form-field>
 							<input matInput placeholder="Facebook App ID" formControlName="fbappid" [value]="CurrentFacebookProvider?.AppID">
 						</mat-form-field>

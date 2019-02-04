@@ -99,6 +99,10 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             this.CurrentFacebookProvider = new ProviderModel();
 
             this.Test = true;
+
+            this.FacebookToggle = true;
+
+            this.GoogleToggle = true;
     
             this.Users = [];
     
@@ -166,9 +170,24 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                 (result) => {
                     if (isResultSuccess(result)) {
                         this.CurrentFacebookProvider = result.Model;
+
+                        if(providerType == "facebook"){
+                            this.FacebookToggle = true;
+                        }
+                        if(providerType == "google"){
+                            this.GoogleToggle = true;
+                        }
                     }
                     else{
                         this.Error = result.Status.Message;
+
+                        if(providerType == "facebook"){
+                            this.FacebookToggle = false;
+                        }
+                        if(providerType == "google"){
+                            this.GoogleToggle = false;
+                        }
+
                     }
                 },
                 (err) => {
