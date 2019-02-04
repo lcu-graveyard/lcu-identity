@@ -110,6 +110,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
             this.GetProvider("facebook");
 
+            
             this.FacebookLoginFormGroup = this.formBldr.group({
                 fbtoggle: new FormControl(),
                 fbappid: new FormControl(''),

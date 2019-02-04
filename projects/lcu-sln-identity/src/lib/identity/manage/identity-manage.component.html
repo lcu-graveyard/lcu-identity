@@ -210,10 +210,10 @@
 					<form [formGroup]="FacebookLoginFormGroup" (ngSubmit)="SaveProvider('facebook')">
 						<mat-slide-toggle matInput formControlName="fbtoggle" [checked]="CurrentFacebookProvider">Enable Facebook Login</mat-slide-toggle>
 						<mat-form-field>
-							<input matInput placeholder="Facebook App ID" formControlName="fbappid" [value]="CurrentFacebookProvider?.Metadata['AppID']">
+							<input matInput placeholder="Facebook App ID" formControlName="fbappid" [value]="CurrentFacebookProvider?.Type">
 						</mat-form-field>
 						<mat-form-field>
-							<input matInput placeholder="Facebook App Secret" formControlName="appsecret" [value]="CurrentFacebookProvider?.Metadata['AppSecret']">
+							<input matInput placeholder="Facebook App Secret" formControlName="appsecret" [value]="CurrentFacebookProvider?.Type">
 						</mat-form-field>
 						<button mat-raised-button color="primary" class="mat-button-lg" type="submit">
 								Save
