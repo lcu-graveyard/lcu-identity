@@ -40,6 +40,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public ClaimsColumnsToDisplay: string[];
 
         public CurrentFacebookProvider: ProviderModel;
+
+        public CurrentGoogleProvider: ProviderModel;
     
         public Error: string;
 
@@ -98,11 +100,11 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
             this.CurrentFacebookProvider = new ProviderModel();
 
-            this.Test = true;
+            this.CurrentGoogleProvider = new ProviderModel();
 
-            this.FacebookToggle = true;
+            this.FacebookToggle = false;
 
-            this.GoogleToggle = true;
+            this.GoogleToggle = false;
     
             this.Users = [];
     
@@ -407,7 +409,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
                 metadata = {
                     AppID: config.AppID,
-                    AppSecret: config.AppSecret
+                    AppSecret: config.AppSecret,
+                    SaveToggle: config.SaveToggle
                 };
             }
 
@@ -416,7 +419,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
                 metadata = {
                     AppID: config.AppID,
-                    AppSecret: ""
+                    AppSecret: "",
+                    SaveToggle: config.SaveToggle
                 };
             }
             
@@ -436,57 +440,28 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                 },
                 () => {
                     this.Loading.Set(false);
-                });
-
-            
-        }
-
-        public SaveConfig() {
-            // this.Loading.Set(true);
-    
-            // var facebookConfig = this.buildFacebookModelFromForm();
-    
-            // this.ProviderConfig.FacebookConfigs["default"] = facebookConfig;
-    
-            // this.providerConfig.Save(this.ProviderConfig).subscribe(
-            //     (status) => {
-            //         if (isStatusSuccess(status)) {
-            //             this.pgUiSvc.Notify.Signal("Facebook Configuration saved successfully");
-            //         } else {
-            //             console.log(status);
-    
-            //             this.pgUiSvc.Notify.Signal(status.Message);
-            //         }
-            //     },
-            //     (err) => {
-            //         console.log(err);
-    
-            //         this.pgUiSvc.Notify.Signal("Unknown error. Please try again, or contact support if the problem continues");
-            //     },
-            //     () => {
-            //         this.Loading.Set(false);
-            //     });
+                });       
         }
 
         //	Helpers
         protected buildFacebookModelFromForm(): FacebookLoginModel {
             return{
                 Name: "Facebook Login Provider",
-                SaveToggle: this.FacebookLoginFormGroup.get('fbtoggle').value,
+                SaveToggle: this.FacebookToggle,
                 Description: "Login Provider for Facebook",
                 Type: "facebook",
-                AppID: this.FacebookLoginFormGroup.get('fbappid').value,
-                AppSecret: this.FacebookLoginFormGroup.get('appsecret').value,
+                AppID: this.FacebookLoginFormGroup.get('fbappid').value || this.CurrentFacebookProvider.AppID,
+                AppSecret: this.FacebookLoginFormGroup.get('appsecret').value || this.CurrentFacebookProvider.AppSecret,
             } 
         }
 
         protected buildGoogleModelFromForm(): GoogleLoginModel {
             return{
                 Name: "Google Login Provider",
-                SaveToggle: this.GoogleLoginFormGroup.get('googletoggle').value,
+                SaveToggle: this.GoogleToggle,
                 Description: "Login Provider for Google",
                 Type: "google",
-                AppID: this.GoogleLoginFormGroup.get('appid').value,
+                AppID: this.GoogleLoginFormGroup.get('appid').value || this.CurrentGoogleProvider.AppID,
             }
         }
 }   
