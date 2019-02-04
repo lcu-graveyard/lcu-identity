@@ -123,6 +123,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
 
             this.GetProvider("facebook");
 
+            this.GetProvider("google");
             
             this.FacebookLoginFormGroup = this.formBldr.group({
                 fbtoggle: new FormControl(),
@@ -461,7 +462,7 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
                 SaveToggle: this.GoogleToggle,
                 Description: "Login Provider for Google",
                 Type: "google",
-                AppID: this.GoogleLoginFormGroup.get('appid').value || this.CurrentGoogleProvider.AppID,
+                AppID: this.GoogleLoginFormGroup.get('googleappid').value || this.CurrentGoogleProvider.AppID,
             }
         }
 }   
