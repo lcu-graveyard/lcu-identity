@@ -9,7 +9,7 @@
 
 	<span class="filler"></span>
 
-	<a mat-icon-button [class.active]="ManageState == 'Settings'" (click)="SetManageState('Settings')"><mat-icon>settings</mat-icon></a>
+	<a mat-icon-button [class.active]="ManageState == 'Settings'" (click)="SetManageState('Settings')"><mat-icon>settings</mat-icon></a> 
 </mat-toolbar>
 
 <div *ngIf="!Loading.Value" [ngSwitch]="ManageState">
