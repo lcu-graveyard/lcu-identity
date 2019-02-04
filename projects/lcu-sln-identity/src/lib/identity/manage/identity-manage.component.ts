@@ -69,6 +69,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public ManageState: string;
     
         public TotalRecords: number;
+
+        public Test: boolean;
     
         public UserActiveEdit: string;
     
@@ -95,6 +97,8 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
             this.ClaimsColumnsToDisplay = ['ClaimType', 'Value', 'Actions'];
 
             this.CurrentFacebookProvider = new ProviderModel();
+
+            this.Test = true;
     
             this.Users = [];
     
