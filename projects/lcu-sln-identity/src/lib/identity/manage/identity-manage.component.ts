@@ -1,4 +1,4 @@
-import { Component, Injector, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Injector, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ISolutionControl, ForgeGenericSolution } from '@lcu/solutions';
 import { isResultSuccess, BaseResponse, BaseModeledResponse, Loading } from '@lcu/core';
 import { ForgeIdentitySolutionManageClaimDialog } from '../dialogs/identity-manage-claim/identity-manage-claim.dialog';
@@ -31,6 +31,9 @@ export class ForgeIdentitySolutionManage extends ForgeGenericSolution
         public AccessRights: AccessRightModel[];
     
         public AccessRightsColumnsToDisplay: string[];
+
+        @Input()
+        public checked: Boolean;
 
         public Claims: ClaimModel[];
     
