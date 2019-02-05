@@ -11,20 +11,21 @@ import { ForgeSignInComponent } from './sign-in.component';
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login'
 
-let config = new AuthServiceConfig([
-	{
-		id: FacebookLoginProvider.PROVIDER_ID,
-		provider: new FacebookLoginProvider("271274289570856"),
-	},
-	{
-		id: GoogleLoginProvider.PROVIDER_ID,
-		provider: new GoogleLoginProvider("271274289570856"),
-	},
-]);
 
-export function provideConfig() {
-	return config;
-  }
+// let config = new AuthServiceConfig([
+// 	{
+// 		id: FacebookLoginProvider.PROVIDER_ID,
+// 		provider: new FacebookLoginProvider("271274289570856"),
+// 	},
+// 	{
+// 		id: GoogleLoginProvider.PROVIDER_ID,
+// 		provider: new GoogleLoginProvider("271274289570856"),
+// 	},
+// ]);
+
+// export function provideConfig() {
+// 	return config;
+//   }
 
 @NgModule({
 	imports: [
@@ -41,12 +42,12 @@ export function provideConfig() {
 	declarations: [
 		ForgeSignInComponent
 	],
-	providers: [
-		{
-			provide: AuthServiceConfig,
-			useFactory: provideConfig,
-		}
-	],
+	// providers: [
+	// 	{
+	// 		provide: AuthServiceConfig,
+	// 		useFactory: provideConfig,
+	// 	}
+	// ],
 	exports: [
 		ForgeSignInComponent
 	]
