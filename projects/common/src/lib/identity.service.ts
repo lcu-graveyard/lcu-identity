@@ -9,6 +9,7 @@ import { SignInModel } from './sign-in-model';
 import { IdentityOptions } from './identity-options';
 import { ConfirmPasswordRecoveryModel } from './confirm-password-recovery-model';
 import { RecoverPasswordModel } from './recover-password-model';
+import { ProviderModel } from '@lcu/apps';
 
 @Injectable({
 	providedIn: 'root'
@@ -51,6 +52,10 @@ export class IdentityService extends DAFService {
         return this.post(model, this.options.SignInURL);
 	}
 
+    public FbSignIn(model: ProviderModel): Observable<BaseResponse> {
+        return this.post(model, this.options.SignInURL);
+    }
+    
     public SignOut(): Observable<BaseResponse> {
         return this.post({}, this.options.SignOutURL);
 	}

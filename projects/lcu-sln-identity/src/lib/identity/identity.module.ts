@@ -11,6 +11,7 @@ import { ForgeIdentitySolutionHeading } from './heading/identity-heading.compone
 import { ForgeIdentitySolutionMarketplace } from './marketplace/identity-marketplace.component';
 import { ForgeIdentitySolutionOverview } from './overview/identity-overview.component';
 import { ForgeIdentitySolutionManageClaimDialog } from './dialogs/identity-manage-claim/identity-manage-claim.dialog';
+import { SocialLoginModule} from 'angularx-social-login';
 
 
 export class ForgeIdentitySolutionDisplayModule extends BaseSolutionModule {
@@ -65,7 +66,8 @@ var comps = [
 		MatTableModule,
 		MatTabsModule,
 		MatToolbarModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		SocialLoginModule,
 	],
 	declarations: [
 		...comps,
