@@ -138,13 +138,10 @@ export class ForgeSignInComponent implements OnInit {
 
 	public HandleSocialSignIn(providerType: string){
 		if (providerType == "facebook")
-			this.socialAuthSvc.signIn(this.CurrentFacebookProvider.AppID).then (
-				(userData) => {
-					
-				}
-			);
+			this.socialAuthSvc.signIn(FacebookLoginProvider.PROVIDER_ID);
+
 		if (providerType == "google")
-			this.socialAuthSvc.signIn(this.CurrentGoogleProvider.AppID);
+			this.socialAuthSvc.signIn(GoogleLoginProvider.PROVIDER_ID);
 	}
 
 	//	Helpers

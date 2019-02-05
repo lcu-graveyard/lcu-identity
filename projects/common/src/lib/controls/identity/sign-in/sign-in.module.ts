@@ -9,8 +9,22 @@ import { FathymSharedModule } from '@lcu/hosting';
 
 import { ForgeSignInComponent } from './sign-in.component';
 
-import { SocialLoginModule } from 'angularx-social-login'
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login'
 
+let config = new AuthServiceConfig([
+	{
+		id: FacebookLoginProvider.PROVIDER_ID,
+		provider: new FacebookLoginProvider("271274289570856"),
+	},
+	{
+		id: GoogleLoginProvider.PROVIDER_ID,
+		provider: new GoogleLoginProvider("271274289570856"),
+	},
+]);
+
+export function provideConfig() {
+	return config;
+  }
 
 @NgModule({
 	imports: [
@@ -26,6 +40,12 @@ import { SocialLoginModule } from 'angularx-social-login'
 	],
 	declarations: [
 		ForgeSignInComponent
+	],
+	providers: [
+		{
+			provide: AuthServiceConfig,
+			useFactory: provideConfig,
+		}
 	],
 	exports: [
 		ForgeSignInComponent
